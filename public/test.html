@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>share test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <h1>
+      <a name="hello-world" href="#hello-world">
+        Hello world!
+      </a>
+    </h1>
+
+    <div id="app">
+      <anchored-heading :level="level">hello-world</anchored-heading>
+    </div>
+
+    <script type="text/x-template" id="anchored-heading-template">
+      <h1 v-if="level===1"><slot></slot></h1>
+      <h2 v-else-if="level===2"><slot></slot></h2>
+      <h3 v-else-if="level===3"><slot></slot></h3>
+      <h4 v-else-if="level===4"><slot></slot></h4>
+      <h5 v-else-if="level===5"><slot></slot></h5>
+      <h6 v-else-if="level===6"><slot></slot></h6>
+    </script>
+
+    <script>
+      Vue.component("test", {
+        template: `
+                <div>test</div>
+            `,
+      });
+      Vue.component("anchored-heading", {
+        // template: "#anchored-heading-template",
+        render: function(createElement) {
+          return createElement(
+            "h" + this.level, // 标签名称
+
+            // this.$slots.default //子节点数组
+            [
+              createElement(
+                Test,
+                this.$slots.default //子节点数组
+              ),
+            ]
+          );
+        },
+        props: {
+          level: {
+            type: Number,
+            required: true,
+          },
+        },
+      });
+      new Vue({
+        el: "#app",
+        data: {
+          level: 5,
+        },
+      });
+    </script>
+  </body>
+</html>
