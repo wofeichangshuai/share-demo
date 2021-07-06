@@ -7,14 +7,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   </head>
   <body>
-    <h1>
-      <a name="hello-world" href="#hello-world">
-        Hello world!
-      </a>
-    </h1>
-
     <div id="app">
-      <anchored-heading :level="level">hello-world</anchored-heading>
+      <anchored-heading :level="level">hello-world11</anchored-heading>
     </div>
 
     <script type="text/x-template" id="anchored-heading-template">
@@ -27,40 +21,100 @@
     </script>
 
     <script>
-      Vue.component("anchored-heading", {
-        // template: "#anchored-heading-template",
-        render: function(createElement) {
-          /*=========== 第一个参数 */
-          // return createElement('div','恩额谔谔谔谔谔谔谔谔谔谔')
-          // return createElement({template: '<div>哦哦哦哦哦哦</div>'})
-          // const fun = function(){
-            // return 'div'
-            // return {template:'<div>好得很好得很好得很</div>'}
-          // }
-          // return createElement(fun(),'柔柔弱弱让柔柔弱弱让')
-          // return createElement(fun())
-          /*=========== 第二个参数 */
-          // return createElement('div'
-          // ,{
-          //   style: {
-          //     color: 'red',
-          //     backgroundColor: 'blue'
-          //   }
-          // }
-          // ,'恩额谔谔谔谔谔谔谔谔谔谔')
-          /*=======第三个参数 */
-          // return createElement(
-            // "h" + this.level, // 标签名称
+      // Vue.component("anchored-heading", {
+      //   // template: "#anchored-heading-template",
+      //   render: function(createElement) {
+      //     /*=========== 第一个参数 */
+      //     // return createElement('div','恩额谔谔谔谔谔谔谔谔谔谔')
+      //     // return createElement({template: '<div>哦哦哦哦哦哦</div>'})
+      //     // const fun = function(){
+      //     // return 'div'
+      //     // return {template:'<div>好得很好得很好得很</div>'}
+      //     // }
+      //     // return createElement(fun(),'柔柔弱弱让柔柔弱弱让')
+      //     // return createElement(fun())
+      //     /*=========== 第二个参数 */
+      //     // return createElement(
+      //     //   "div",
+      //     //   {
+      //     //     style: {
+      //     //       color: "red",
+      //     //       backgroundColor: "blue",
+      //     //     },
+      //     //   },
+      //     //   "恩额谔谔谔谔谔谔谔谔谔谔"
+      //     // );
+      //     /*=======第三个参数 */
+      //     // ["恩额谔谔谔谔谔谔谔谔谔谔",
+      //     // createElement('h1', '一则头条'),
+      //     // createElement(MyComponent, {
+      //     //   props: {
+      //     //     someProp: 'foobar'
+      //     //   }
+      //     // })]
+      //     //
+      //     // return createElement(
+      //     // "h" + this.level, // 标签名称
+      //     // this.$slots.default //子节点数组
+      //     // [
+      //     //   createElement({
+      //     //     template: '<div>啦啦啦啦啦啦啦</div>'
+      //     //   }),
+      //     //   createElement({
+      //     //     template: '<h3>哈哈哈哈哈哈</h3>'
+      //     //   }),
+      //     // ]
+      //     // );
+      //   },
+      //   props: {
+      //     level: {
+      //       type: Number,
+      //       required: true,
+      //     },
+      //   },
+      // });
 
-            // this.$slots.default //子节点数组
-            // [
-            //   createElement({
-            //     template: '<div>啦啦啦啦啦啦啦</div>'
-            //   }),
-            //   createElement({
-            //     template: '<h3>哈哈哈哈哈哈</h3>'
-            //   }),
-            // ]
+      var getChildrenTextContent = function(children) {
+        return children
+          .map(function(node) {
+            return node.children
+              ? getChildrenTextContent(node.children)
+              : node.text;
+          })
+          .join("");
+      };
+
+      Vue.component("anchored-heading", {
+        render: function(createElement) {
+          // 创建 kebab-case 风格的 ID
+          // var headingId = getChildrenTextContent(this.$slots.default)
+          //   .toLowerCase()
+          //   .replace(/\W+/g, "-")
+          //   .replace(/(^-|-$)/g, "");
+          // console.log("headingId", headingId);
+          // return createElement("h" + this.level, [
+          //   createElement(
+          //     "a",
+          //     {
+          //       attrs: {
+          //         name: headingId,
+          //         href: "#" + headingId,
+          //       },
+          //     },
+          //     this.$slots.default
+          //   ),
+          // ]);
+          // var myParagraphVNode = createElement("p", "hi");
+          // return createElement("div", [
+          //   // 错误 - 重复的 VNode
+          //   myParagraphVNode,
+          //   myParagraphVNode,
+          // ]);
+          // return createElement(
+          //   "div",
+          //   Array.apply(null, { length: 20 }).map(function() {
+          //     return createElement("p", "hi");
+          //   })
           // );
         },
         props: {

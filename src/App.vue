@@ -1,21 +1,24 @@
 <template>
   <div id="app">
-    <render-a>
+    <!-- <render-a>
       render a
       <div slot="slotA">slotA</div>
-    </render-a>
+    </render-a> -->
     <!-- <comp-a /> -->
+    <render-c />
   </div>
 </template>
 
 <script>
 import CompA from "@/views/compA.vue";
 import RenderA from "@/views/renderA";
+import RenderC from "@/views/renderC";
 export default {
   name: "app",
   components: {
     CompA,
     RenderA,
+    RenderC,
   },
   mounted() {},
 };
