@@ -4,7 +4,7 @@
       render a
       <div slot="slotA">slotA</div>
     </render-a>
-    <comp-a />
+    <!-- <comp-a /> -->
   </div>
 </template>
 
