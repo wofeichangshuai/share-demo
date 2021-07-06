@@ -27,25 +27,41 @@
     </script>
 
     <script>
-      Vue.component("test", {
-        template: `
-                <div>test</div>
-            `,
-      });
       Vue.component("anchored-heading", {
         // template: "#anchored-heading-template",
         render: function(createElement) {
-          return createElement(
-            "h" + this.level, // 标签名称
+          /*=========== 第一个参数 */
+          // return createElement('div','恩额谔谔谔谔谔谔谔谔谔谔')
+          // return createElement({template: '<div>哦哦哦哦哦哦</div>'})
+          // const fun = function(){
+            // return 'div'
+            // return {template:'<div>好得很好得很好得很</div>'}
+          // }
+          // return createElement(fun(),'柔柔弱弱让柔柔弱弱让')
+          // return createElement(fun())
+          /*=========== 第二个参数 */
+          // return createElement('div'
+          // ,{
+          //   style: {
+          //     color: 'red',
+          //     backgroundColor: 'blue'
+          //   }
+          // }
+          // ,'恩额谔谔谔谔谔谔谔谔谔谔')
+          /*=======第三个参数 */
+          // return createElement(
+            // "h" + this.level, // 标签名称
 
             // this.$slots.default //子节点数组
-            [
-              createElement(
-                Test,
-                this.$slots.default //子节点数组
-              ),
-            ]
-          );
+            // [
+            //   createElement({
+            //     template: '<div>啦啦啦啦啦啦啦</div>'
+            //   }),
+            //   createElement({
+            //     template: '<h3>哈哈哈哈哈哈</h3>'
+            //   }),
+            // ]
+          // );
         },
         props: {
           level: {
