@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <anchored-heading :level="level">Hello world!</anchored-heading> -->
+      <render-method-test />
+    </div>
+
+    <!-- <script type="text/x-template" id="anchored-heading-template">
+      <h1 v-if="level === 1">
+          <slot></slot>
+      </h1>
+      <h2 v-else-if="level === 2">
+          <slot></slot>
+      </h2>
+      <h3 v-else-if="level === 3">
+          <slot></slot>
+      </h3>
+      <h4 v-else-if="level === 4">
+          <slot></slot>
+      </h4>
+      <h5 v-else-if="level === 5">
+          <slot></slot>
+      </h5>
+      <h6 v-else-if="level === 6">
+          <slot></slot>
+      </h6>
+    </script> -->
+    <script>
+      /*
+        createElement这个函数中有3个参数
+        第一个参数（必要参数）：主要用于提供DOM的html内容，类型可以是字符串、对象或函数
+        第二个参数（类型是对象，可选）：用于设置这个DOM的一些样式、属性、传的组件的参数、绑定事件之类
+        第三个参数（类型是数组，数组元素类型是VNode，可选）：主要是指该结点下还有其他结点，用于设置分发的内容，包括新增的其他组件。注意，组件树中的所有VNode必须是唯一的
+    */
+      Vue.component("render-method-test", {
+        render: function(h) {
+          //   return h("div", "render函数");
+          //   return h({ template: "<div>render函数对象</div>" });
+          const fun = function() {
+            // return "h1";
+            return { template: "<div>render函数 fun() return </div>" };
+          };
+          //   return h(fun(), "render函数 fun");
+          return h(fun(), {
+            // class: {
+            //   foo: true,
+            //   bar: false,
+            // },
+            // class: ["foo", "bar"],
+            // style: {
+            //   color: "red",
+            //   fontSize: "14px",
+            // },
+            style: this.renderStyle,
+            domProps: {
+              innerHTML: "啦啦啦啦啦啦啦",
+            },
+          });
+        },
+        computed: {
+          renderStyle() {
+            return {
+              color: "blue",
+              fontSize: "14px",
+            };
+          },
+        },
+      });
+      //   Vue.component("anchored-heading", {
+      //     //   template: "#anchored-heading-template",
+      //     render: function(h) {
+      //       return h("h" + this.level, this.$slots.default);
+      //     },
+      //     props: {
+      //       level: {
+      //         type: Number,
+      //         required: true,
+      //       },
+      //     },
+      //   });
+      //   Vue.component("anchored-heading", {
+      //     template: "#anchored-heading-template",
+      //     props: {
+      //       level: {
+      //         type: Number,
+      //         required: true,
+      //       },
+      //     },
+      //   });
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            level: 3,
+          };
+        },
+      });
+    </script>
+  </body>
+</html>
