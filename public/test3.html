@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test3</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <parent-a></parent-a> -->
+      <!-- <parent-b /> -->
+      <parent-c />
+    </div>
+
+    <script>
+      Vue.component("parent-c", {
+        render: function(h) {
+          return h("div", [
+            h("child-c", {
+              scopedSlots: {
+                footer(props) {
+                  return h("span", "footer 插槽");
+                },
+                default(props) {
+                  // return h("span", "slots default");
+                  return "1111111111111111";
+                },
+              },
+            }),
+          ]);
+        },
+      });
+      Vue.component("child-c", {
+        render: function(h) {
+          console.log(this.$slots);
+
+          return h("div", [
+            h("h1", "child-c"),
+            h("div", [this.$slots.default]),
+            // h("p", [this.$slots.footer]),
+          ]);
+        },
+      });
+      //   Vue.component("parent-b", {
+      //     data() {
+      //       return {
+      //         value: "1ss",
+      //       };
+      //     },
+      //     render: function(h) {
+      //       const self = this;
+      //       return h("div", [
+      //         h("child-b", {
+      //           on: {
+      //             inputEmit: function(value) {
+      //               console.log(33, value);
+
+      //               self.value = value;
+      //             },
+      //           },
+      //           props: {
+      //             value: self.value,
+      //           },
+      //         }),
+      //         h(
+      //           "div",
+      //           {
+      //             on: {
+      //               "!click": function() {
+      //                 alert(111);
+      //               },
+      //             },
+      //           },
+      //           self.value
+      //         ),
+      //         h("input", {
+      //           attrs: {
+      //             value: self.value,
+      //           },
+      //           on: {
+      //             input: function(event) {
+      //               self.value = event.target.value;
+      //             },
+      //           },
+      //         }),
+      //       ]);
+      //     },
+      //   });
+      //   Vue.component("child-b", {
+      //     props: ["value"],
+      //     render: function(h) {
+      //       const self = this;
+      //       console.log(11, self.value);
+
+      //       return h("input", {
+      //         // domProp: {
+      //         //   value: self.value,
+      //         // },
+      //         attrs: {
+      //           value: self.value,
+      //         },
+      //         on: {
+      //           input: function(event) {
+      //             console.log(22, event.target.value);
+
+      //             self.$emit("inputEmit", event.target.value);
+      //           },
+      //         },
+      //       });
+      //     },
+      //   });
+      //   Vue.component("parent-a", {
+      //     data() {
+      //       return {
+      //         value: "",
+      //       };
+      //     },
+      //     render: function(h) {
+      //       const self = this;
+      //       return h("div", [
+      //         h("input", {
+      //           on: {
+      //             input: function(event) {
+      //               self.value = event.target.value;
+      //             },
+      //           },
+      //         }),
+      //         h("div", self.value),
+      //         h(
+      //           "child-a",
+      //           {
+      //             props: {
+      //               childValue: self.value,
+      //               aaa: 1,
+      //             },
+      //             scopedSlots: {
+      //               footer: function(props) {
+      //                 // return h("h4", props.text + "：" + props.name);
+      //                 return props.text + "：" + props.name;
+      //               },
+      //             },
+      //           },
+      //           []
+      //           //   self.value
+      //         ),
+      //       ]);
+      //     },
+      //   });
+
+      //   Vue.component("child-a", {
+      //   props: ["childValue", "aaa"],
+      //   render: function(h) {
+      //     const self = this;
+      //     const footer = this.$scopedSlots.footer({
+      //       text: "啦啦啦啦啦啦",
+      //       name: "张三三",
+      //     });
+
+      //     return h("div", [h("h1", [self.childValue]), h("h2", [footer])]);
+      //   },
+      // });
+
+      new Vue({
+        el: "#app",
+      });
+    </script>
+  </body>
+</html>

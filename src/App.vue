@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import CompA from "@/views/compA.vue";
-import RenderA from "@/views/renderA";
-import RenderC from "@/views/renderC";
+import CompA from "@/views/test1/compA.vue";
+import RenderA from "@/views/test1/renderA";
+import RenderC from "@/views/test1/renderC";
 export default {
   name: "app",
   components: {
