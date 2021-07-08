@@ -9,7 +9,8 @@
   <body>
     <div id="app">
       <!-- <anchored-heading :level="level">Hello world!</anchored-heading> -->
-      <render-method-test />
+      <!-- <render-method-test /> -->
+      <t-e-s-t/>
     </div>
 
     <!-- <script type="text/x-template" id="anchored-heading-template">
@@ -40,15 +41,17 @@
         第三个参数（类型是数组，数组元素类型是VNode，可选）：主要是指该结点下还有其他结点，用于设置分发的内容，包括新增的其他组件。注意，组件树中的所有VNode必须是唯一的
     */
       Vue.component("render-method-test", {
+        props: ['value'],
         render: function(h) {
           //   return h("div", "render函数");
           //   return h({ template: "<div>render函数对象</div>" });
-          const fun = function() {
-            // return "h1";
-            return { template: "<div>render函数 fun() return </div>" };
-          };
+          // const fun = function() {
+          //   // return "h1";
+          //   return { template: "<div>render函数 fun() return </div>" };
+          // };
           //   return h(fun(), "render函数 fun");
-          return h(fun(), {
+          // return h('p', {
+          // return h(fun(), {
             // class: {
             //   foo: true,
             //   bar: false,
@@ -58,11 +61,37 @@
             //   color: "red",
             //   fontSize: "14px",
             // },
-            style: this.renderStyle,
+            // style: this.renderStyle,
+            // domProps: {
+            //   innerHTML: '<div onclick="clk">啦啦啦啦啦啦啦</div>',
+            // },
+            // on:{
+            //   click:function(){
+            //     alert(1111111);
+            //   }
+            // }
+            // nativeOn:{
+            //   click:function(){
+            //     alert(222222)
+            //   }
+            // }
+          // });
+          const self = this;
+          console.log(111,self)
+          return h('input',{
             domProps: {
-              innerHTML: "啦啦啦啦啦啦啦",
+              value: self.value
             },
-          });
+            on: {
+              input:function(event){
+                console.log(22,event)
+                self.$emit('input1',event.target.value)
+              }
+            }
+          })
+          // return(
+          //   <div>111</div>
+          // )
         },
         computed: {
           renderStyle() {
@@ -94,6 +123,24 @@
       //       },
       //     },
       //   });
+      Vue.component('t-e-s-t',{
+        data(){
+          return {
+            value1:222
+          }
+        },
+        render:function(h){
+          const self = this;
+          return h('h1',[h('render-method-test',{
+            on:{
+              input1:(val)=>{
+                self.value1 = val
+              }
+            },
+            value:this.value1}),'哈哈'+this.value1])
+        }
+
+      })
       new Vue({
         el: "#app",
         data() {
