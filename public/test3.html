@@ -33,12 +33,13 @@
       });
       Vue.component("child-c", {
         render: function(h) {
-          console.log(this.$slots);
-
+          console.log(this.$scopedSlots);
+          const default1 = this.$scopedSlots.default();
+          const footer = this.$scopedSlots.footer();
           return h("div", [
             h("h1", "child-c"),
-            h("div", [this.$slots.default]),
-            // h("p", [this.$slots.footer]),
+            h("div", [default1]),
+            h("p", [footer]),
           ]);
         },
       });
